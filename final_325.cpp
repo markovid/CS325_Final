@@ -10,6 +10,7 @@
  #include <sstream>
  #include <string>
  #include <vector>
+ #include <cmath>
  //change DEBUG to 0 to run without debugging output messages
  #define DEBUG 1
 
@@ -19,6 +20,8 @@ struct city{
 	int x;
 	int y;
 };
+
+int distance(struct city a, struct city b);
 
 int main(int argc, char *argv[]){
 	//make sure number of arguments is correct
@@ -47,7 +50,20 @@ int main(int argc, char *argv[]){
 		cityList.push_back(temp);
 		count++;
 	}
-	
+	if (DEBUG){
+		struct city a, b, c;
+		a.id = 1;
+		a.x = a.y = 0;
+		b.id = 2;
+		b.x = 1;
+		b.y = 3;
+		c.id = 3;
+		c.x = 6;
+		c.y = 0;
+		std::cout<< "distance from a to b should be 3.  It is calculated to be: " << distance(a,b) << "\n";
+		std::cout<< "distance from b to c should be 6.  It is calculated to be: " << distance(b,c) << "\n";
+		std::cout<< "distance from c to a should be 6.  It is calculated to be: " << distance(c,a) << "\n";
+	}
 	if(DEBUG)
 		if(count == cityList.size())
 			std::cout << "count matches cityList size\n";
@@ -70,5 +86,6 @@ int main(int argc, char *argv[]){
 	
 }
  
- 
-;
+int distance(struct city a, struct city b){
+	return round(sqrt(pow((b.x - a.x),2) + pow((b.y - a.y),2)));
+} 
